@@ -195,6 +195,8 @@ components:
         description:
           type: string
           example: Buy groceries
+        nEWFIELD3:
+          type: string
       required:
         - id
         - description
@@ -210,14 +212,10 @@ components:
         isDone:
           type: string
           example: 'false'
-        dueDate:
-          type: string
-          example: '2023-11-15'
       required:
         - id
         - description
         - isDone
-        - dueDate
     MarkItemDoneRequest:
       type: object
       properties:
