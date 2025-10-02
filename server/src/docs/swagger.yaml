@@ -9,30 +9,6 @@ tags:
   - name: ToDo
     description: Operations related to the ToDo bounded context.
 paths:
-  /add-item:
-    post:
-      summary: Add Item
-      description: Executes the "Add Item" command. ...
-      operationId: addItem
-      tags:
-        - ToDo
-      responses:
-        '200':
-          description: 'OK: The resource was updated successfully.'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Item'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AddItemRequest'
   /update-item-description:
     post:
       summary: Update Item Description
@@ -57,72 +33,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateItemDescriptionRequest'
-  /mark-item-done:
-    post:
-      summary: Mark Item Done
-      description: Executes the "Mark Item Done" command. ...
-      operationId: markItemDone
-      tags:
-        - ToDo
-      responses:
-        '200':
-          description: 'OK: The resource was updated successfully.'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Item'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MarkItemDoneRequest'
-  /delete-item:
-    post:
-      summary: Delete Item
-      description: Executes the "Delete Item" command. ...
-      operationId: deleteItem
-      tags:
-        - ToDo
-      responses:
-        '200':
-          description: 'OK: The resource was updated successfully.'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Item'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeleteItemRequest'
-  /get-all-items:
-    get:
-      summary: Get All Items
-      description: Retrieves data based on the "Get All Items" query. This is a synchronous query operation.
-      operationId: getAllItems
-      tags:
-        - ToDo
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetAllItemsResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
   /get-item-by-id/{id}:
     get:
       summary: Get Item by ID
@@ -186,20 +96,6 @@ components:
         - isDone
         - dueDate
         - priority
-    AddItemRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          example: item-001
-        description:
-          type: string
-          example: Buy groceries
-        nEWFIELD3:
-          type: string
-      required:
-        - id
-        - description
     UpdateItemDescriptionRequest:
       type: object
       properties:
@@ -216,58 +112,6 @@ components:
         - id
         - description
         - isDone
-    MarkItemDoneRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          example: item-001
-        description:
-          type: string
-          example: Buy groceries
-        isDone:
-          type: string
-          example: 'false'
-        dueDate:
-          type: string
-          example: '2023-11-15'
-        priority:
-          type: string
-          example: High
-      required:
-        - id
-        - description
-        - isDone
-        - dueDate
-        - priority
-    DeleteItemRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          example: item-001
-      required:
-        - id
-    GetAllItemsResponse:
-      type: object
-      description: Response schema for the Get All Items query.
-      properties:
-        id:
-          type: string
-          description: The id of the Item.
-          example: item-001
-        description:
-          type: string
-          description: The description of the Item.
-          example: Buy groceries
-        isDone:
-          type: string
-          description: The isDone of the Item.
-          example: 'false'
-        dueDate:
-          type: string
-          description: The dueDate of the Item.
-          example: '2023-11-15'
   parameters:
     ItemId:
       name: id
